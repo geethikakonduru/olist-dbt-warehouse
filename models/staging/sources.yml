@@ -1,0 +1,22 @@
+version: 2
+
+sources:
+  - name: olist
+    description: >
+      Raw Brazilian e-commerce data from the Olist public dataset,
+      including customer records, orders, purchased items and payments.
+    database: olist-dbt
+    schema: olist_raw
+
+    tables:
+      - name: orders
+        description: "Order statuses and purchase/delivery timestamps."
+
+      - name: order_items
+        description: "Items purchased within each order."
+
+      - name: customers
+        description: "Customer identifiers and geographical information."
+
+      - name: payments
+        description: "Payment methods, installment counts and amounts."

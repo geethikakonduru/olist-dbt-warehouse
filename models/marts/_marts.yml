@@ -1,0 +1,54 @@
+version: 2
+
+models:
+
+  - name: dim_customers
+    description: "Customer dimension with one row per customer_id."
+    columns:
+      - name: customer_id
+        description: "Primary key for the customer record."
+        data_tests:
+          - unique
+          - not_null
+
+      - name: customer_unique_id
+        description: "Identifier linking repeat customers."
+        data_tests:
+          - not_null
+
+  - name: fct_order_items
+    description: "Order-item fact table."
+    columns:
+      - name: order_item_key
+        description: "Unique key per order item."
+        data_tests:
+          - unique
+          - not_null
+
+      - name: order_id
+        data_tests:
+          - not_null
+
+      - name: customer_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customers')
+                field: customer_id
+
+      - name: item_price
+        data_tests:
+          - not_null
+
+  - name: mart_daily_sales
+    description: "Daily delivered-order metrics."
+    columns:
+      - name: order_date
+        data_tests:
+          - unique
+          - not_null
+
+      - name: total_orders
+        data_tests:
+          - not_null

@@ -1,0 +1,10 @@
+olist_warehouse:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: oauth
+      project: olist-dbt
+      dataset: olist_analytics
+      location: EU
+      threads: 4
